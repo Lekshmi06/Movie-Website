@@ -9,6 +9,19 @@ import Tv from './Pages.jsx/Tv'
 import Favorite from './Pages.jsx/Favorite'
 import Search from './Pages.jsx/Search'
 import Detail from './Pages.jsx/Detail'
+import Footer from './Component.jsx/Footer'
+import Nav from './Component.jsx/Nav'
+import NowMovie from './Pages.jsx/NowMovie'
+import TopMvie from './Pages.jsx/TopMvie'
+import UpcomingMovie from './Pages.jsx/UpcomingMovie'
+import PopularMovie from './Pages.jsx/PopularMovie'
+import PopularTv from './Pages.jsx/PopularTv'
+import AiringTv from './Pages.jsx/AiringTv'
+import TestVdo from './Pages.jsx/TestVdo'
+import Detailtv from './Pages.jsx/Detailtv'
+
+
+
 function App() {
   
 
@@ -16,7 +29,8 @@ function App() {
     <>
       <div>
          <BrowserRouter>
-         <Navbar/>
+         {/* <Navbar/> */}
+         <Nav/>
           <Routes>
            
           <Route index element = {<Home />}/>
@@ -26,7 +40,18 @@ function App() {
           <Route path="wishlist" element = {<Wishlist/>}/>
           <Route path="favorite" element = {<Favorite/>}/>
           <Route path="detail" element = {<Detail/>}/>
+          <Route path="/movies/top" element={<TopMvie />} />
+          <Route path="/movies/upcoming" element={<UpcomingMovie />} />
+          <Route path="/movies/popular" element={<PopularMovie />} />
+          <Route path="/movies/now" element={<NowMovie />} />
+          <Route path="/tv/popular" element={<PopularTv />} />
+          <Route path="/tv/airing" element={<AiringTv />} />
+          <Route path="/trailer" element={<TestVdo/>} />
+          <Route path="/tv/detail" element={<Detailtv/>} />
+         
+
           </Routes>
+          <Footer/>
          </BrowserRouter>
       </div>
      

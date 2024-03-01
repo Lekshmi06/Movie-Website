@@ -9,7 +9,7 @@ const requests = {
     requestAiringtv:`https://api.themoviedb.org/3/tv/airing_today?api_key=${key}&language=en-US&page=1`,
     requestPopulartv:`https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`,
     requestTop:`https://api.themoviedb.org/3/tv/top_rated?api_key=${key}&language=en-US&page=1`,
-
-}
+    requestDetailstv:`https://api.themoviedb.org/3/tv/series_id/season/season_number?api_key=${key}&language=en-US`
+}                  
 
 export default requests

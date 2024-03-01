@@ -37,16 +37,30 @@ function Home() {
       },
     };
 
+    const n =nowplaying[Math.floor(Math.random() * nowplaying.length)]
 
     const[main, setMain] = useState([])
+    useEffect(() => {
+      axios.get(requests.requestNowplaying)
+        .then((response) => {
+          setNowplaying(response.data.results);
+          const n = Math.floor(Math.random() * response.data.results.length);
+          if (response.data.results.length > 0) {
+            setMain(response.data.results[n]);
+          }
+        });
+    }, []);
+    
+
 
     useEffect(()=>{
-        axios.get(requests.requestNowplaying)
-        .then((response)=>{
-          setNowplaying(response.data.results)
-            setMain(response.data.results[0])
-            console.log(response.data.results[0])
-        })
+        // axios.get(requests.requestNowplaying)
+        // .then((response)=>{
+        //   setNowplaying(response.data.results)
+        //   const n =nowplaying[Math.floor(Math.random() * nowplaying.length)]
+        //     setMain(response.data.results[n])
+        //     console.log(response.data.results[n])
+        // })
         axios.get(requests.requestPopular)
         .then((response)=>{
           setPopular(response.data.results)
@@ -77,13 +91,13 @@ function Home() {
    
   return (
     // <div className="bg-cover w-screen h-screen" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${main.backdrop_path})` }}>
-    <div className='bg-black'>
-    <div className="bg-cover w-screen h-screen pt-20" style={{ backgroundImage: main.backdrop_path ? `url(https://image.tmdb.org/t/p/original/${main.backdrop_path})` : '' }}>
+    <div className='bg-black overflow-hidden'>
+    <div className="   bg-cover bg-no-repeat w-screen h-screen pt-20 o" style={{ backgroundImage: main.backdrop_path ? `url(https://image.tmdb.org/t/p/original/${main.backdrop_path})` : '' }}>
     <div className="bg-gray-800 bg-opacity-50 mt-96 p-8">
       <h1 className="text-4xl font-bold text-white mb-4">{main.title}</h1>
       <h1 className=" mb-4 text-white">{main.overview}</h1>
-      <p className="mb-2">Original Language: {main.original_language}</p>
-      <p className="text-lg mb-2">Rating: {main.vote_average}</p>
+      <p className="mb-2 text-white">Original Language: {main.original_language}</p>
+      <p className="text-lg mb-2 text-white">Rating: {main.vote_average}</p>
       <div className="flex space-x-4">
         {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Add to Watchlist
@@ -95,7 +109,7 @@ function Home() {
     </div>
     </div>
     <div className='bg-black'>
-      <p className='text-xl mt-6 text-white'>Now Playing</p>
+      <p className='text-xl mt-6 pl-5 text-white'>Now Playing</p>
     <Carousel responsive={responsive}>
           {nowplaying &&
             nowplaying.map((mov) => (
@@ -103,12 +117,12 @@ function Home() {
               onClick={() => HandleChange(mov.id)}
                 key={mov.id}
 
-                className="w-[150px] h-[200px] mx-4 my-6 rounded overflow-hidden shadow-lg bg-no-repeat bg-cover"
+                className="w-[150px] h-[200px] mx-4 my-6 rounded overflow-hidden shadow-lg bg-no-repeat bg-contain"
                 style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${mov.poster_path})` }}
               ></div>
             ))}
         </Carousel>
-        <p className='text-xl mt-5 text-white'>Shows airing today</p>
+        <p className='text-xl mt-5 pl-5 text-white'>Shows airing today</p>
     <Carousel responsive={responsive}>
           {air &&
             air.map((mov) => (
@@ -121,7 +135,7 @@ function Home() {
               ></div>
             ))}
         </Carousel>
-        <p className='text-xl mt-5 text-white'>Trending</p>
+        <p className='text-xl mt-5 pl-5 text-white'>Trending</p>
     <Carousel responsive={responsive}>
           {tops &&
             tops.map((top) => (
@@ -134,7 +148,7 @@ function Home() {
               ></div>
             ))}
         </Carousel>
-        <p className='text-xl mt-5 text-white'>Popular</p>
+        <p className='text-xl mt-5 pl-5 text-white'>Popular</p>
     <Carousel responsive={responsive}>
           {populars &&
             populars.map((mov) => (
@@ -147,7 +161,7 @@ function Home() {
               ></div>
             ))}
         </Carousel>
-        <p className='text-xl mt-5 text-white'>Shows airing today</p>
+        <p className='text-xl mt-5 text-white pl-5'>Shows airing today</p>
     <Carousel responsive={responsive}>
           {air &&
             air.map((mov) => (
@@ -160,7 +174,7 @@ function Home() {
               ></div>
             ))}
         </Carousel>
-        <p className='text-xl mt-5 text-white'>Latest</p>
+        <p className='text-xl mt-5 text-white pl-5'>Latest</p>
     <Carousel responsive={responsive}>
           {upcomings &&
             upcomings.map((mov) => (

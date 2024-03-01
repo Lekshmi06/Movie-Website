@@ -45,7 +45,7 @@ function Search() {
   // }
 
   return (
-    <div className="bg-black bg-cover w-screen h-screen">
+    <div className="bg-black bg-cover w-screen h-screen ">
      <div className="flex justify-center bg-white h-10 w-[250px] rounded p-4 ml-10 pb-2 gap-2 items-center">
   <div className="text-slate-600">
     <FaSearch />

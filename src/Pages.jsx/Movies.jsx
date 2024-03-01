@@ -39,19 +39,30 @@ function Movies() {
     navigate(`/detail/?id=${id}`);
   }
 
+  useEffect(() => {
+    axios.get(requests.requestPopular)
+      .then((response) => {
+        setPopular(response.data.results);
+        const n = Math.floor(Math.random() * response.data.results.length);
+        if (response.data.results.length > 0) {
+          setMain(response.data.results[n]);
+        }
+      });
+  }, []);
+
   useEffect(()=>{
       axios.get(requests.requestNowplaying)
       .then((response)=>{
         setNowplaying(response.data.results)
-          setMain(response.data.results[0])
-          console.log(response.data.results[0])
+          // setMain(response.data.results[0])
+          // console.log(response.data.results[0])
       })
-      axios.get(requests.requestPopular)
-      .then((response)=>{
-        setPopular(response.data.results)
+      // axios.get(requests.requestPopular)
+      // .then((response)=>{
+      //   setPopular(response.data.results)
          
-          console.log(response.data.results)
-      })
+      //     console.log(response.data.results)
+      // })
       axios.get(requests. requestToprated)
       .then((response)=>{
         setUpcominging(response.data.results)
@@ -74,10 +85,10 @@ return (
   <div className='bg-black'>
   <div className="bg-cover w-screen h-screen pt-20" style={{ backgroundImage: main.backdrop_path ? `url(https://image.tmdb.org/t/p/original/${main.backdrop_path})` : '' }}>
   <div className="bg-gray-800 bg-opacity-50 mt-96 p-8">
-    <h1 className="text-3xl font-bold mb-4">{main.title}</h1>
-    <h1 className="font-bold mb-4">{main.overview}</h1>
-    <p className="mb-2">Original Language: {main.original_language}</p>
-    <p className="text-lg mb-2">Rating: {main.vote_average}</p>
+    <h1 className="text-3xl  text-white font-bold mb-4">{main.title}</h1>
+    <h1 className="  text-white mb-4">{main.overview}</h1>
+    <p className="mb-2  text-white">Original Language: {main.original_language}</p>
+    <p className="text-lg mb-2  text-white">Rating: {main.vote_average}</p>
     {/* <div className="flex space-x-4">
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Add to Watchlist
@@ -107,7 +118,7 @@ return (
           tops.map((top) => (
             <div
               key={top.id}
-              onClick={() => HandleChange(mov.id)}
+              onClick={() => HandleChange(top.id)}
               className="w-[150px] h-[200px] mx-4 my-6 rounded overflow-hidden shadow-lg bg-no-repeat bg-cover"
               style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${top.poster_path})` }}
             ></div>
