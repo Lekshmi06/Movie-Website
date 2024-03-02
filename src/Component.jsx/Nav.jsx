@@ -1,22 +1,31 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
     const [activeDropdown, setActiveDropdown] = useState(null);
-
+    const navigate = useNavigate()
     const toggleDropdown = (dropdown) => {
         setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
     };
 
+    const HandleLogout = () => {
+        Cookies.remove('token')
+        navigate('/login')
+    }
+
     const closeDropdown = () => {
         setActiveDropdown(null);
     };
-
+ 
+    const isAuthenticated = Cookies.get('token') !== undefined;
     return (
        <div className='flex flex-row justify-between bg-black'>
-        <div className='ml-2'>
+        <div className='ml-2 pl-5'>
             <span className='text-3xl text-white'>cine</span><span className='text-4xl text-orange-400'>X</span>
         </div>
+        {isAuthenticated &&   
         <div>
            <ul className='flex flex-row gap-5 justify-between my-5'>
            <li><NavLink to="/" style={({ isActive }) => ({
@@ -56,12 +65,26 @@ const Navbar = () => {
             </li>
            </ul>
         </div>
+}
         <ul className='flex flex-row gap-5 my-5'>
+        {isAuthenticated &&   
         <li><NavLink to="search"  style={({ isActive }) => ({
                                 color: isActive
                                     ? "gold"
                                     : "white",
-                            })}  className="text-white hover:text-[#7b2323] a:text-[#90d36f] pr-4 ">search</NavLink></li>
+                            })}  className="text-white hover:text-[#dd9c42] a:text-[#90d36f] pr-4 ">Search</NavLink></li>
+                        }
+           {isAuthenticated ? (
+            <li
+                            onClick={HandleLogout}
+                             className="text-white hover:text-[#dd9c42] cursor-pointer a:text-[#90d36f] pr-4 ">Logout</li>
+        ) : (
+            <li><NavLink to="/login"  style={({ isActive }) => ({
+                                color: isActive
+                                    ? "gold"
+                                    : "white",
+                            })}  className="text-white hover:text-[#dd9c42]  pr-10 ">Login</NavLink></li>
+        )}        
         </ul>
        </div>
     );

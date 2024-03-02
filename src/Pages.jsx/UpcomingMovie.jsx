@@ -31,7 +31,7 @@ function UpcomingMovie() {
   return (
     <div className='bg-black min-h-screen'>
       <p className='text-3xl  text-center text-white'>Upcoming</p>
-      <div className='flex flex-wrap  mt-5 gap-7  justify-center mb-6'>
+      <div className='flex flex-wrap  mt-5 gap-7  justify-center '>
         {populars &&
           populars.map((mov) => (
             <div

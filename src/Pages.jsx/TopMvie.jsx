@@ -33,7 +33,7 @@ function TopMvie() {
     return (
       <div className='bg-black min-h-screen'>
         <p className='text-3xl  text-center text-white'>Top Rated</p>
-        <div className='flex flex-wrap justify-center mb-6'>
+        <div className='flex flex-wrap justify-center '>
           {populars &&
             populars.map((mov) => (
               <div

@@ -19,6 +19,9 @@ import PopularTv from './Pages.jsx/PopularTv'
 import AiringTv from './Pages.jsx/AiringTv'
 import TestVdo from './Pages.jsx/TestVdo'
 import Detailtv from './Pages.jsx/Detailtv'
+import VdoTv from './Pages.jsx/VdoTv'
+import Login from './Pages.jsx/Login'
+import Register from './Pages.jsx/Register'
 
 
 
@@ -48,6 +51,9 @@ function App() {
           <Route path="/tv/airing" element={<AiringTv />} />
           <Route path="/trailer" element={<TestVdo/>} />
           <Route path="/tv/detail" element={<Detailtv/>} />
+          <Route path="/tv/trailer" element={<VdoTv/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
          
 
           </Routes>
